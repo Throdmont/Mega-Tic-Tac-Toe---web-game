@@ -6,7 +6,7 @@ body{
     height: 50em;
     width: 50em;
     position: relative;
-    left: calc(50vw - 25em);
+    margin: auto;
     margin-top: 1em;
 }
 .column{
