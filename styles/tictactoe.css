@@ -1,0 +1,62 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.base{
+    border: solid 2px;
+    height: 50em;
+    width: 50em;
+    position: relative;
+    left: calc(50vw - 25em);
+    margin-top: 1em;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.tile{
+    flex: 1;
+    border: solid 1px;
+}
+.mega{
+    border: solid 5px;
+}
+.onRound{
+    border: solid 1px;
+    display: flex;
+    width: 22%;
+}
+.onRound div{
+    flex: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    border: solid 1px;
+}
+.onRound .what{
+    flex: 1;
+    aspect-ratio: 1 / 1;
+}
+.textM{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7em;
+}
+.textT{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+}
