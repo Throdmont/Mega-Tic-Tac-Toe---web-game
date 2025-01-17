@@ -78,7 +78,7 @@ body.darkMode {
 .onRound{
     border: solid 1px;
     display: flex;
-    width: 22%;
+    width: 22em;
 }
 .onRound div{
     flex: 5;
