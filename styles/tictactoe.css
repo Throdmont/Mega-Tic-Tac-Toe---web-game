@@ -1,14 +1,66 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
+:root {
+    --background: #ffffff;
+    --tile-border: #ccc;
+    --text-color: #000000;
 }
-.base{
-    border: solid 2px;
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.darkMode {
+    --background: #1f2937;
+    --tile-border: #555;
+    --text-color: #ffffff;
+}
+
+#themeButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.base {
+    border: solid 2px var(--tile-border);
     height: 50em;
     width: 50em;
     position: relative;
     margin: auto;
     margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.row {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+.tile {
+    flex: 1;
+    border: solid 1px var(--tile-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tile:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
 .column{
     display: flex;
     flex-direction: column;
@@ -19,17 +71,14 @@ body{
     flex-direction: row;
     flex: 1;
 }
-.tile{
-    flex: 1;
-    border: solid 1px;
-}
+
 .mega{
     border: solid 5px;
 }
 .onRound{
     border: solid 1px;
     display: flex;
-    width: 22em;
+    width: 22%;
 }
 .onRound div{
     flex: 5;
@@ -49,7 +98,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 7em;
+    font-size: 12em;
 }
 .textT{
     width: 100%;
