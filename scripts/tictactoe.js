@@ -332,3 +332,34 @@ function win(cislo){
     }
 
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const themeButton = document.getElementById("themeButton");
+
+    loadTheme(themeButton);
+
+    themeButton.addEventListener("click", () => {
+        const isDarkMode = document.body.classList.toggle("darkMode");
+        themeButton.textContent = isDarkMode ? "🌞" : "🌙";
+        localStorage.setItem("darkMode", isDarkMode);
+        applyThemeStyles(isDarkMode);
+    });
+});
+
+function loadTheme(button) {
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    document.body.classList.toggle("darkMode", isDarkMode);
+    button.textContent = isDarkMode ? "🌞" : "🌙";
+    applyThemeStyles(isDarkMode);
+}
+
+function applyThemeStyles(isDarkMode) {
+    if (isDarkMode) {
+        document.documentElement.style.setProperty('--background', '#1f2937');
+        document.documentElement.style.setProperty('--tile-border', '#555');
+        document.documentElement.style.setProperty('--text-color', '#ffffff');
+    } else {
+        document.documentElement.style.setProperty('--background', '#ffffff');
+        document.documentElement.style.setProperty('--tile-border', '#ccc');
+        document.documentElement.style.setProperty('--text-color', '#000000');
+    }
+}
