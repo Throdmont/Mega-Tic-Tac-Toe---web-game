@@ -50,10 +50,18 @@ function revealTile(M_Tile, T_Tile){
                     }else{
                         document.getElementById(`M${M_Tile +1}T${T_Tile + (radek * 3)}`).innerHTML = `<div class="textT">×</div>`;
                     }
-                    setAroundColor(choosenMTile, "black");
+                    
+
+                    removeAroundColor(choosenMTile);
                     choosenMTile = T_Tile + (radek * 3);
-                    setAroundColor(choosenMTile, "red");
+                    setAroundColor(choosenMTile);
                     controlM_Tile(M_Tile);
+                    if(bannedMtiles.includes(choosenMTile)){
+                        removeAroundColor(choosenMTile);
+                        TurnOffOn = false;
+                        ChooseOffOn = true;
+                        choosenMTile = -1;
+                    }
                     StartPlayerTurn();
                 }
             }
@@ -67,13 +75,17 @@ function choose(M_Tile){
             choosenMTile = M_Tile;
             TurnOffOn = true;
             ChooseOffOn = false;
-            setAroundColor(choosenMTile, "red");
+            setAroundColor(choosenMTile);
         }
     }
 }
-//Měnič barvy MTile
-function setAroundColor(M_Tile, color){
-    document.getElementById(`M${M_Tile+1}`).style.borderColor = color;
+//Přidáváč červeného kolem
+function setAroundColor(M_Tile){
+    document.getElementById(`M${M_Tile+1}`).classList.add('redAround');
+}
+//Odstraňovač červeného kolem
+function removeAroundColor(M_Tile){
+    document.getElementById(`M${M_Tile+1}`).classList.remove('redAround');
 }
 //Funkce co vždycky po změně tahu bude zahájena
 function StartPlayerTurn(){
@@ -93,31 +105,25 @@ function StartPlayerTurn(){
 
     //Kontrola zda v daném poli jde  ještě vůbec hýbat
     if(choosenMTile > -1){
-        if(bannedMtiles.includes(choosenMTile)){
-            setAroundColor(choosenMTile, "black");
-            TurnOffOn = false;
-            ChooseOffOn = true;
-            console.log("aaa");
-        }else{
-            let kontrolka = false;
-            for(let x = 0; x < 9; x++){
-                let radek = 0;
-                radek = Math.floor(x / 3);
-                let y = x - (radek * 3);
-                if(!DataArray[choosenMTile][radek][y]){
-                    kontrolka = true;
-                }
-            }
-            if(!kontrolka){
-                setAroundColor(choosenMTile, "black");
-                TurnOffOn = false;
-                ChooseOffOn = true;
-                DataArray[choosenMTile] = 0;
-                bannedMtiles.push(choosenMTile);
+        let kontrolka = false;
+        for(let x = 0; x < 9; x++){
+            let radek = 0;
+            radek = Math.floor(x / 3);
+            let y = x - (radek * 3);
+            if(!DataArray[choosenMTile][radek][y]){
+                kontrolka = true;
             }
         }
+        if(!kontrolka){
+            removeAroundColor(choosenMTile);
+            TurnOffOn = false;
+            ChooseOffOn = true;
+            DataArray[choosenMTile] = 0;
+            bannedMtiles.push(choosenMTile);
+        }
+        
     }else{
-        ChooseOffOn = false;
+        ChooseOffOn = true;
     }
     
     controlFinal();
@@ -335,8 +341,10 @@ function win(cislo){
 document.addEventListener("DOMContentLoaded", () => {
     const themeButton = document.getElementById("themeButton");
 
+    // Load the theme from localStorage and apply it
     loadTheme(themeButton);
 
+    // Add event listener for theme toggle
     themeButton.addEventListener("click", () => {
         const isDarkMode = document.body.classList.toggle("darkMode");
         themeButton.textContent = isDarkMode ? "🌞" : "🌙";

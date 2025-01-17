@@ -109,3 +109,6 @@ body.darkMode {
     font-size: 3em;
     font-weight: bold;
 }
+.redAround{
+    border-color: red;
+}
